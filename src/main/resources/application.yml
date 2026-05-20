@@ -4,9 +4,6 @@ server:
 spring:
   application:
     name: census31-fwmt-csvservice
-  jackson:
-    serialization:
-      WRITE_DATES_AS_TIMESTAMPS: false
   security:
     user:
       name: "user"
@@ -20,6 +17,7 @@ management:
       show-details: always
 
 logging:
+  profile: DEV
   level:
     root: WARN
     uk.gov.ons.census.fwmt: INFO
@@ -52,3 +50,17 @@ gcpBucket:
   addresschecklocation: "file://${home}/acceptance/data/AC.csv"
   postcodelookuplocation: "file://${home}/acceptance/data/addressLookup.csv"
   directory: "file://${home}/acceptance/data/"
+
+app:
+  testing: false
+  rabbitmq:
+    gw:
+      username: "guest"
+      password: "guest"
+      host: "localhost"
+      port: 5672
+      virtualHost: "/"
+      exchanges:
+        error: "REMOVE"
+      queues:
+        errorPer: "REMOVE"
