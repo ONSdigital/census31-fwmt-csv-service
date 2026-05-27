@@ -53,6 +53,8 @@ gcpBucket:
 
 app:
   testing: false
+  messaging:
+    provider: rabbit
   rabbitmq:
     gw:
       username: "guest"

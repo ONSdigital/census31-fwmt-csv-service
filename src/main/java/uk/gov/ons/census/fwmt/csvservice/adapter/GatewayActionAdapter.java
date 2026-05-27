@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.gov.ons.census.fwmt.canonical.v1.CreateFieldWorkerJobRequest;
 import uk.gov.ons.census.fwmt.common.error.GatewayException;
-import uk.gov.ons.census.fwmt.csvservice.message.GatewayActionProducer;
+import uk.gov.ons.census.fwmt.csvservice.messaging.GatewayActionPublisher;
 import uk.gov.ons.census.fwmt.events.component.GatewayEventManager;
 
 @Component
@@ -14,7 +14,7 @@ public class GatewayActionAdapter {
   private GatewayEventManager gatewayEventManager;
 
   @Autowired
-  private GatewayActionProducer jobServiceProducer;
+  private GatewayActionPublisher jobServiceProducer;
 
   public void sendJobRequest(CreateFieldWorkerJobRequest createdMessage, String event) throws GatewayException {
     jobServiceProducer.sendMessage(createdMessage);
