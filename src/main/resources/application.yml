@@ -55,6 +55,8 @@ app:
   testing: false
   messaging:
     provider: rabbit
+    destinations:
+      gatewayActions: "Gateway.Actions.Exchange"
   rabbitmq:
     gw:
       username: "guest"
@@ -66,3 +68,16 @@ app:
         error: "REMOVE"
       queues:
         errorPer: "REMOVE"
+
+---
+spring:
+  config:
+    activate:
+      on-property:
+        name: app.messaging.provider
+        having-value: pubsub
+  cloud:
+    gcp:
+      project-id: ${FWMT_PUBSUB_PROJECT:fwmt-local}
+      pubsub:
+        enabled: true
