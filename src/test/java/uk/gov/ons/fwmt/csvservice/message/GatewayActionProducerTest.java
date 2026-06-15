@@ -9,37 +9,32 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import uk.gov.ons.census.fwmt.canonical.v1.CreateFieldWorkerJobRequest;
 import uk.gov.ons.census.fwmt.common.error.GatewayException;
-import uk.gov.ons.census.fwmt.csvservice.messaging.GatewayActionPublisher;
-import uk.gov.ons.census.fwmt.csvservice.messaging.rabbit.RabbitGatewayActionPublisher;
-import uk.gov.ons.census.fwmt.events.component.GatewayEventManager;
+import uk.gov.ons.census.fwmt.csvservice.messaging.GatewayActionJsonCodec;
+import uk.gov.ons.census.fwmt.csvservice.messaging.pubsub.PubSubGatewayActionPublisher;
 import uk.gov.ons.fwmt.csvservice.helper.FieldWorkerRequestMessageBuilder;
+
+import com.google.cloud.spring.pubsub.core.PubSubTemplate;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GatewayActionProducerTest {
 
   @InjectMocks
-  private RabbitGatewayActionPublisher gatewayActionProducer;
+  private PubSubGatewayActionPublisher gatewayActionProducer;
 
   @Mock
-  private ObjectMapper objectMapper;
+  private PubSubTemplate pubSubTemplate;
 
   @Mock
-  private GatewayEventManager gatewayEventManager;
+  private GatewayActionJsonCodec codec;
 
-  @Test(expected = GatewayException.class)
-  public void sendBadMessage() throws JsonProcessingException, GatewayException {
-    //Given
+  @Test(expected = IllegalStateException.class)
+  public void sendBadMessage() throws GatewayException {
     FieldWorkerRequestMessageBuilder messageBuilder = new FieldWorkerRequestMessageBuilder();
     CreateFieldWorkerJobRequest createJobRequest = messageBuilder.buildCreateFieldWorkerJobRequestCCS();
-    when(objectMapper.writeValueAsString(eq(createJobRequest))).thenThrow(new JsonProcessingException("Error") {
-    });
+    when(codec.toPubsubMessage(eq(createJobRequest))).thenThrow(new IllegalStateException("Failed to encode"));
 
-    //When
     gatewayActionProducer.sendMessage(createJobRequest);
   }
 }
