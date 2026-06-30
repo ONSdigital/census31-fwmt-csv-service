@@ -23,20 +23,9 @@ logging:
     uk.gov.ons.census.fwmt: INFO
     org.springframework.security: INFO
     org.springframework.web: INFO
-    org.springframework.amqp: INFO
     org.hibernate: INFO
     org.apache.commons.dbcp2: INFO
     org.springframework: INFO
-
-rabbitmq:
-  username: "guest"
-  password: "guest"
-  hostname: "localhost"
-  port: 5672
-  virtualHost: "/"
-  initialinterval: 5000
-  multiplier: 3.0
-  maxInterval: 45000
 
 gcpBucket:
 #  celocation: "gs://csv-bucket-test/ceTestCSV.csv"
@@ -53,21 +42,14 @@ gcpBucket:
 
 app:
   testing: false
+  retry:
+    initialInterval: 5000
+    multiplier: 3.0
+    maxInterval: 45000
   messaging:
-    provider: rabbit
+    provider: pubsub
     destinations:
       gatewayActions: "Gateway.Actions.Exchange"
-  rabbitmq:
-    gw:
-      username: "guest"
-      password: "guest"
-      host: "localhost"
-      port: 5672
-      virtualHost: "/"
-      exchanges:
-        error: "REMOVE"
-      queues:
-        errorPer: "REMOVE"
 
 ---
 spring:
@@ -79,5 +61,8 @@ spring:
   cloud:
     gcp:
       project-id: ${FWMT_PUBSUB_PROJECT:fwmt-local}
+      credentials:
+        enabled: false
       pubsub:
         enabled: true
+        emulator-host: ${PUBSUB_EMULATOR_HOST:localhost:8085}

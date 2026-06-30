@@ -9,21 +9,20 @@ import uk.gov.ons.census.fwmt.common.retry.DefaultListenerSupport;
 import uk.gov.ons.census.fwmt.common.retry.GatewayRetryPolicy;
 
 @Configuration
-public class RabbitMQConfig {
+public class GatewayRetryConfig {
 
   private int initialInterval;
   private double multiplier;
   private int maxInterval;
 
-  public RabbitMQConfig(@Value("${rabbitmq.initialinterval}") Integer initialInterval,
-      @Value("${rabbitmq.multiplier}") Double multiplier,
-      @Value("${rabbitmq.maxInterval}") Integer maxInterval) {
+  public GatewayRetryConfig(@Value("${app.retry.initialInterval}") Integer initialInterval,
+      @Value("${app.retry.multiplier}") Double multiplier,
+      @Value("${app.retry.maxInterval}") Integer maxInterval) {
     this.initialInterval = initialInterval;
     this.multiplier = multiplier;
     this.maxInterval = maxInterval;
   }
 
-  // Retry Template
   @Bean
   public RetryTemplate retryTemplate() {
     RetryTemplate retryTemplate = new RetryTemplate();
