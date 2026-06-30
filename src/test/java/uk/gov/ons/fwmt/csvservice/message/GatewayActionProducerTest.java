@@ -14,7 +14,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import uk.gov.ons.census.fwmt.canonical.v1.CreateFieldWorkerJobRequest;
 import uk.gov.ons.census.fwmt.common.error.GatewayException;
-import uk.gov.ons.census.fwmt.csvservice.message.GatewayActionProducer;
+import uk.gov.ons.census.fwmt.csvservice.messaging.GatewayActionPublisher;
+import uk.gov.ons.census.fwmt.csvservice.messaging.rabbit.RabbitGatewayActionPublisher;
 import uk.gov.ons.census.fwmt.events.component.GatewayEventManager;
 import uk.gov.ons.fwmt.csvservice.helper.FieldWorkerRequestMessageBuilder;
 
@@ -22,7 +23,7 @@ import uk.gov.ons.fwmt.csvservice.helper.FieldWorkerRequestMessageBuilder;
 public class GatewayActionProducerTest {
 
   @InjectMocks
-  private GatewayActionProducer gatewayActionProducer;
+  private RabbitGatewayActionPublisher gatewayActionProducer;
 
   @Mock
   private ObjectMapper objectMapper;

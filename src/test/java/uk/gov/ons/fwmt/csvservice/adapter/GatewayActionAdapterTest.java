@@ -9,7 +9,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import uk.gov.ons.census.fwmt.canonical.v1.CreateFieldWorkerJobRequest;
 import uk.gov.ons.census.fwmt.common.error.GatewayException;
 import uk.gov.ons.census.fwmt.csvservice.adapter.GatewayActionAdapter;
-import uk.gov.ons.census.fwmt.csvservice.message.GatewayActionProducer;
+import uk.gov.ons.census.fwmt.csvservice.messaging.GatewayActionPublisher;
 import uk.gov.ons.census.fwmt.events.component.GatewayEventManager;
 import uk.gov.ons.fwmt.csvservice.helper.FieldWorkerRequestMessageBuilder;
 
@@ -28,7 +28,7 @@ public class GatewayActionAdapterTest {
   private GatewayEventManager gatewayEventManager;
 
   @Mock
-  private GatewayActionProducer gatewayActionProducer;
+  private GatewayActionPublisher gatewayActionProducer;
 
   @Test
   public void sendCCSRequestToJobService() throws GatewayException {
