@@ -1,4 +1,4 @@
-FROM openjdk:11-jdk-slim
+FROM eclipse-temurin:25-jre
 ARG jar
 RUN groupadd -g 998 censuscsvservice && \
     useradd -r -u 998 -g censuscsvservice censuscsvservice
