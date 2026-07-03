@@ -36,3 +36,4 @@ local.properties
 .classpath
 
 application-location.yml
+target/
