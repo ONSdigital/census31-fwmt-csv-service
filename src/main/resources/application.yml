@@ -38,7 +38,7 @@ gcpBucket:
   ccslocation: "file://${home}/acceptance/data/ccsTestCSV.csv"
   addresschecklocation: "file://${home}/acceptance/data/AC.csv"
   postcodelookuplocation: "file://${home}/acceptance/data/addressLookup.csv"
-  directory: "file://${home}/acceptance/data1/"
+  directory: "file://${home}/acceptance/data/"
 
 app:
   testing: false
@@ -62,9 +62,9 @@ spring:
     gcp:
       project-id: ${FWMT_PUBSUB_PROJECT:fwmt-local}
       credentials:
-        enabled: ${FWMT_GCP_CREDENTIALS_ENABLED:true}
+        enabled: false
       firestore:
         enabled: false
       pubsub:
         enabled: true
-        emulator-host: ${PUBSUB_EMULATOR_HOST:}
+        emulator-host: ${PUBSUB_EMULATOR_HOST:localhost:8085}
