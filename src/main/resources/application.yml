@@ -62,7 +62,7 @@ spring:
     gcp:
       project-id: ${FWMT_PUBSUB_PROJECT:fwmt-local}
       credentials:
-        enabled: false
+        enabled: true
       firestore:
         enabled: false
       pubsub:
