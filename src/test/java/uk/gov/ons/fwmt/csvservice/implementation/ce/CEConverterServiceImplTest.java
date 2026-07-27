@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.util.ReflectionTestUtils;
 import uk.gov.census.ffa.storage.utils.StorageUtils;
 import uk.gov.ons.census.fwmt.csvservice.adapter.GatewayActionAdapter;
@@ -43,9 +44,9 @@ public class CEConverterServiceImplTest {
     // Given
     ClassLoader classLoader = getClass().getClassLoader();
     String testPathString = classLoader.getResource("ceTestCSV.csv").getPath();
-    FileSystemResource testResource = new FileSystemResource(testPathString);
+    Resource testResource = new FileSystemResource(testPathString);
 
-    ReflectionTestUtils.setField(ceConverterService, "file", testResource.getURI().toString());
+    ReflectionTestUtils.setField(ceConverterService, "file", testResource);
     ReflectionTestUtils.setField(ceConverterService, "directory", "resources/");
 
     FileInputStream fileInputStream = new FileInputStream(testResource.getFile());
