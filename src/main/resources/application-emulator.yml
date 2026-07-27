@@ -1,0 +1,46 @@
+# Local development profile for PubSub emulator + local file storage
+# Usage: mvn spring-boot:run -Dspring-boot.run.arguments="--spring.profiles.active=emulator"
+#
+# This profile:
+# - Disables real GCP credentials (uses NoCredentialsProvider)
+# - Routes CSV data to local file:// paths instead of gs:// buckets
+# - Points PubSub to localhost:8085 emulator
+
+server:
+  port: 8060
+
+spring:
+  application:
+    name: census31-fwmt-csvservice
+  cloud:
+    gcp:
+      project-id: fwmt-local
+      credentials:
+        enabled: false  # Disable ADC; NoCredentialsProvider bean will handle PubSub
+      firestore:
+        enabled: false
+      pubsub:
+        enabled: true
+        emulator-host: localhost:8085
+
+# Use local file paths for CSV data instead of GCS buckets
+gcpBucket:
+  celocation: "file://${user.home}/acceptance/data/ceTestCSV.csv"
+  ccslocation: "file://${user.home}/acceptance/data/ccsTestCSV.csv"
+  addresschecklocation: "file://${user.home}/acceptance/data/AC.csv"
+  postcodelookuplocation: "file://${user.home}/acceptance/data/addressLookup.csv"
+  directory: "file://${user.home}/acceptance/data/"
+
+app:
+  testing: true
+  messaging:
+    provider: pubsub
+    destinations:
+      gatewayActions: "Gateway.Actions.Exchange"
+
+logging:
+  level:
+    root: WARN
+    uk.gov.ons.census.fwmt: DEBUG
+    org.springframework.cloud.gcp: DEBUG
+

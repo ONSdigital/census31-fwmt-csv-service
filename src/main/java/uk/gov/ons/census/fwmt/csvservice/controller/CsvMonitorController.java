@@ -2,9 +2,9 @@ package uk.gov.ons.census.fwmt.csvservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import uk.gov.ons.census.fwmt.common.error.GatewayException;
 import uk.gov.ons.census.fwmt.csvservice.dto.PostcodeLookup;
 import uk.gov.ons.census.fwmt.csvservice.service.CSVConverterService;
@@ -12,7 +12,7 @@ import uk.gov.ons.census.fwmt.csvservice.service.LookupFileLoaderService;
 
 import java.util.Map;
 
-@Controller
+@RestController
 public class CsvMonitorController {
 
   @Autowired
