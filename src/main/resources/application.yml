@@ -64,11 +64,9 @@ spring:
         having-value: pubsub
   cloud:
     gcp:
-      project-id: ${FWMT_PUBSUB_PROJECT:fwmt-local}
+      project-id: fwmt-local
       credentials:
         enabled: true
-      firestore:
-        enabled: false
       pubsub:
         enabled: true
       storage:
