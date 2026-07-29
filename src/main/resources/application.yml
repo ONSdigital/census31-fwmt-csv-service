@@ -71,6 +71,5 @@ spring:
         enabled: false
       pubsub:
         enabled: true
-        emulator-host: localhost:8085
       storage:
         enabled: false
