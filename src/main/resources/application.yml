@@ -44,6 +44,12 @@ gcpBucket:
    postcodelookuplocation: "file://${home}/acceptance/data/addressLookup.csv"
    directory: "file://${home}/acceptance/data/"
 
+springdoc:
+  swagger-ui:
+    enabled: true
+    url: /v3/api-docs.yaml
+  api-docs:
+    enabled: true
 app:
   testing: false
   retry:
