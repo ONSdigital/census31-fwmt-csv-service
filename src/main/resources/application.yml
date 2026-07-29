@@ -1,7 +1,3 @@
-# Default production profile with real GCP Storage + PubSub
-# For emulator testing, use:  mvn spring-boot:run -Dspring-boot.run.arguments="--spring.profiles.active=emulator"
-# See application-emulator.yml for local development configuration.
-
 server:
   port: 8060
 
@@ -42,17 +38,11 @@ logging:
     org.springframework: INFO
 
 gcpBucket:
-  celocation: "gs://c31-sandbox-simon-diaz-dev-fwmt-csv-data/ceTestCSV.csv"
-  ccslocation: "gs://c31-sandbox-simon-diaz-dev-fwmt-csv-data/ccsTestCSV.csv"
-  addresschecklocation: "gs://c31-sandbox-simon-diaz-dev-fwmt-csv-data/AC.csv"
-  postcodelookuplocation: "gs://c31-sandbox-simon-diaz-dev-fwmt-csv-data/addressLookup.csv"
-  directory: "gs://c31-sandbox-simon-diaz-dev-fwmt-csv-data/"
-
-  # celocation: "file://${home}/acceptance/data/ceTestCSV.csv"
-  # ccslocation: "file://${home}/acceptance/data/ccsTestCSV.csv"
-  # addresschecklocation: "file://${home}/acceptance/data/AC.csv"
-  # postcodelookuplocation: "file://${home}/acceptance/data/addressLookup.csv"
-  # directory: "file://${home}/acceptance/data/"
+   celocation: "file://${home}/acceptance/data/ceTestCSV.csv"
+   ccslocation: "file://${home}/acceptance/data/ccsTestCSV.csv"
+   addresschecklocation: "file://${home}/acceptance/data/AC.csv"
+   postcodelookuplocation: "file://${home}/acceptance/data/addressLookup.csv"
+   directory: "file://${home}/acceptance/data/"
 
 app:
   testing: false
@@ -81,4 +71,6 @@ spring:
         enabled: false
       pubsub:
         enabled: true
-        emulator-host: ${PUBSUB_EMULATOR_HOST:localhost:8085}
+        emulator-host: localhost:8085
+      storage:
+        enabled: false
