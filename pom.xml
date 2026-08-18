@@ -6,42 +6,21 @@
 
   <parent>
     <groupId>uk.gov.ons.census.fwmt</groupId>
-    <artifactId>census31-fwmt-parent</artifactId>
-    <version>27.0.1</version>
+    <artifactId>census31-fwmt-common-parent</artifactId>
+    <version>27.0.4</version>
     <relativePath/>
   </parent>
 
   <artifactId>census31-fwmt-csv-service</artifactId>
   <packaging>jar</packaging>
   <name>census31-fwmt-csv-service</name>
-
-  <properties>
-    <fwmt.canonical.version>27.0.1</fwmt.canonical.version>
-    <fwmt.common.version>27.0.1</fwmt.common.version>
-    <fwmt.events.version>27.0.1</fwmt.events.version>
-    <fwmt.storage.utils.version>27.0.1</fwmt.storage.utils.version>
-  </properties>
+  <version>27.0.2</version>
 
   <dependencies>
     <dependency>
       <groupId>uk.gov.ons.census.fwmt</groupId>
-      <artifactId>census31-fwmt-canonical</artifactId>
-      <version>${fwmt.canonical.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>uk.gov.ons.census.fwmt</groupId>
-      <artifactId>census31-fwmt-events</artifactId>
-      <version>${fwmt.events.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>uk.gov.ons.census.fwmt</groupId>
       <artifactId>census31-fwmt-common</artifactId>
-      <version>${fwmt.common.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>uk.gov.ons.census.ffa</groupId>
-      <artifactId>census31-fwmt-storage-utils</artifactId>
-      <version>${fwmt.storage.utils.version}</version>
+      <version>${project.parent.version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>

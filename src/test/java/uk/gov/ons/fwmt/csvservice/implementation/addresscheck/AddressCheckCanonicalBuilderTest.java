@@ -1,7 +1,7 @@
 package uk.gov.ons.fwmt.csvservice.implementation.addresscheck;
 
 import org.junit.Test;
-import uk.gov.ons.census.fwmt.canonical.v1.CreateFieldWorkerJobRequest;
+import uk.gov.ons.census.fwmt.common.canonical.v1.CreateFieldWorkerJobRequest;
 import uk.gov.ons.census.fwmt.csvservice.dto.AddressCheckListing;
 import uk.gov.ons.census.fwmt.csvservice.dto.PostcodeLookup;
 import uk.gov.ons.fwmt.csvservice.helper.CSVRecordBuilder;

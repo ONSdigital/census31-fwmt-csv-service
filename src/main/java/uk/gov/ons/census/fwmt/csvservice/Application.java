@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @EnableAsync
 @SpringBootApplication
-@ComponentScan({"uk.gov.ons.census.fwmt.csvservice", "uk.gov.ons.census.fwmt.events", "uk.gov.census.ffa.storage.utils"})
+@ComponentScan({"uk.gov.ons.census.fwmt.csvservice", "uk.gov.ons.census.fwmt.common.events", "uk.gov.ons.census.fwmt.common.storageutils"})
 public class Application {
 
   public static final String APPLICATION_NAME = "FWMT Gateway - CSV Service";
