@@ -36,4 +36,5 @@ local.properties
 .classpath
 
 application-location.yml
+.flattened-pom.xml
 target/
