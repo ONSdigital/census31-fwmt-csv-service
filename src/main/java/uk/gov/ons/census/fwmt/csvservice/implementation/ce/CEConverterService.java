@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
-import uk.gov.census.ffa.storage.utils.StorageUtils;
-import uk.gov.ons.census.fwmt.canonical.v1.CreateFieldWorkerJobRequest;
+import uk.gov.ons.census.fwmt.common.storageutils.StorageUtils;
+import uk.gov.ons.census.fwmt.common.canonical.v1.CreateFieldWorkerJobRequest;
 import uk.gov.ons.census.fwmt.common.error.GatewayException;
 import uk.gov.ons.census.fwmt.csvservice.adapter.GatewayActionAdapter;
 import uk.gov.ons.census.fwmt.csvservice.config.GatewayEventsConfig;
 import uk.gov.ons.census.fwmt.csvservice.dto.CEJobListing;
 import uk.gov.ons.census.fwmt.csvservice.service.CSVConverterService;
-import uk.gov.ons.census.fwmt.events.component.GatewayEventManager;
+import uk.gov.ons.census.fwmt.common.events.component.GatewayEventManager;
 
 import java.io.IOException;
 import java.io.InputStream;

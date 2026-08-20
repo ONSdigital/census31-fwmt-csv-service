@@ -1,6 +1,6 @@
 package uk.gov.ons.fwmt.csvservice.helper;
 
-import uk.gov.ons.census.fwmt.canonical.v1.CreateFieldWorkerJobRequest;
+import uk.gov.ons.census.fwmt.common.canonical.v1.CreateFieldWorkerJobRequest;
 
 import java.util.UUID;
 

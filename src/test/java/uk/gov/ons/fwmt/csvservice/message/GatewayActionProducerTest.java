@@ -9,7 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import uk.gov.ons.census.fwmt.canonical.v1.CreateFieldWorkerJobRequest;
+import uk.gov.ons.census.fwmt.common.canonical.v1.CreateFieldWorkerJobRequest;
 import uk.gov.ons.census.fwmt.common.error.GatewayException;
 import uk.gov.ons.census.fwmt.csvservice.messaging.GatewayActionJsonCodec;
 import uk.gov.ons.census.fwmt.csvservice.messaging.pubsub.PubSubGatewayActionPublisher;

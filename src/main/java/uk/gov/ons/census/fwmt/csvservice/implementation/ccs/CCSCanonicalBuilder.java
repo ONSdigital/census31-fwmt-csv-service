@@ -1,7 +1,7 @@
 package uk.gov.ons.census.fwmt.csvservice.implementation.ccs;
 
-import uk.gov.ons.census.fwmt.canonical.v1.Address;
-import uk.gov.ons.census.fwmt.canonical.v1.CreateFieldWorkerJobRequest;
+import uk.gov.ons.census.fwmt.common.canonical.v1.Address;
+import uk.gov.ons.census.fwmt.common.canonical.v1.CreateFieldWorkerJobRequest;
 import uk.gov.ons.census.fwmt.csvservice.dto.CCSPropertyListing;
 
 import java.util.UUID;

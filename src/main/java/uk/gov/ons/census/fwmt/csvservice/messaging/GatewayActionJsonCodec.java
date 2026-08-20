@@ -5,7 +5,7 @@ import com.google.protobuf.ByteString;
 import com.google.pubsub.v1.PubsubMessage;
 import java.io.IOException;
 import org.springframework.stereotype.Component;
-import uk.gov.ons.census.fwmt.canonical.v1.CreateFieldWorkerJobRequest;
+import uk.gov.ons.census.fwmt.common.canonical.v1.CreateFieldWorkerJobRequest;
 
 @Component
 public class GatewayActionJsonCodec {

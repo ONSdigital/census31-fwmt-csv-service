@@ -1,8 +1,8 @@
 package uk.gov.ons.census.fwmt.csvservice.implementation.ce;
 
-import uk.gov.ons.census.fwmt.canonical.v1.Address;
-import uk.gov.ons.census.fwmt.canonical.v1.Contact;
-import uk.gov.ons.census.fwmt.canonical.v1.CreateFieldWorkerJobRequest;
+import uk.gov.ons.census.fwmt.common.canonical.v1.Address;
+import uk.gov.ons.census.fwmt.common.canonical.v1.Contact;
+import uk.gov.ons.census.fwmt.common.canonical.v1.CreateFieldWorkerJobRequest;
 import uk.gov.ons.census.fwmt.csvservice.dto.CEJobListing;
 
 import java.util.UUID;

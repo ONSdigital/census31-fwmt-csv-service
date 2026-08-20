@@ -2,4 +2,3 @@
 
 # census31-fwmt-csv-service
 
-trigger build

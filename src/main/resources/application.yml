@@ -52,6 +52,7 @@ springdoc:
     url: /v3/api-docs.yaml
   api-docs:
     enabled: true
+
 app:
   testing: false
   retry:

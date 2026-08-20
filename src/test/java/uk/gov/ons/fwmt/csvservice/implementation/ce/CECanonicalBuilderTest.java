@@ -1,7 +1,7 @@
 package uk.gov.ons.fwmt.csvservice.implementation.ce;
 
 import org.junit.Test;
-import uk.gov.ons.census.fwmt.canonical.v1.CreateFieldWorkerJobRequest;
+import uk.gov.ons.census.fwmt.common.canonical.v1.CreateFieldWorkerJobRequest;
 import uk.gov.ons.census.fwmt.csvservice.dto.CEJobListing;
 import uk.gov.ons.fwmt.csvservice.helper.CSVRecordBuilder;
 
