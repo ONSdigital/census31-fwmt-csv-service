@@ -100,7 +100,7 @@ steps:
       - -ceu
       - |
         EFFECTIVE_VERSION="$(cat /workspace/effective-version.txt)"
-        mvn -B -ntp -s /workspace/settings.xml -Drevision="$${EFFECTIVE_VERSION}" clean verify
+        mvn -B -ntp -s /workspace/settings.xml -Drevision="$EFFECTIVE_VERSION" clean verify
 
   - name: gcr.io/cloud-builders/docker
     id: Build Docker Snapshot Image

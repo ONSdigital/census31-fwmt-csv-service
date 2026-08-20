@@ -87,15 +87,15 @@ steps:
       - -ceu
       - |
         BASE_VERSION="$(sed 's/-Drevision=//' .mvn/maven.config | tr -d '[:space:]')"
-        if [[ -z "$${BASE_VERSION}" ]]; then
+        if [[ -z "$BASE_VERSION" ]]; then
           echo "ERROR: could not read version from .mvn/maven.config" >&2
           exit 1
         fi
 
-        BASE_VERSION="$(echo "$${BASE_VERSION}" | sed -E 's/-SNAPSHOT$//; s/-RC$//')"
+        BASE_VERSION="$(echo "$BASE_VERSION" | sed -E 's/-SNAPSHOT$//; s/-RC$//')"
 
-        EFFECTIVE_VERSION="$${BASE_VERSION}-RC"
-        echo "$${EFFECTIVE_VERSION}" > /workspace/effective-version.txt
+        EFFECTIVE_VERSION="$BASE_VERSION-RC"
+        echo "$EFFECTIVE_VERSION" > /workspace/effective-version.txt
 
   - name: maven:3.9.16-eclipse-temurin-25
     id: Test
@@ -104,7 +104,7 @@ steps:
       - -ceu
       - |
         EFFECTIVE_VERSION="$(cat /workspace/effective-version.txt)"
-        mvn -B -ntp -s /workspace/settings.xml -Drevision="$${EFFECTIVE_VERSION}" clean verify
+        mvn -B -ntp -s /workspace/settings.xml -Drevision="$EFFECTIVE_VERSION" clean verify
 
   - name: gcr.io/cloud-builders/docker
     id: Build Docker Main Image
@@ -115,7 +115,7 @@ steps:
         EFFECTIVE_VERSION="$(cat /workspace/effective-version.txt)"
         docker build --pull \
           --build-arg jar=$(ls target/*.jar | grep -v original | head -1) \
-          -t "${_DOCKER_REGION}-docker.pkg.dev/${PROJECT_ID}/${_DOCKER_REPO}/${_IMAGE}:$${EFFECTIVE_VERSION}" \
+          -t "${_DOCKER_REGION}-docker.pkg.dev/${PROJECT_ID}/${_DOCKER_REPO}/${_IMAGE}:$EFFECTIVE_VERSION" \
           .
 
   - name: gcr.io/cloud-builders/docker
@@ -125,7 +125,7 @@ steps:
       - -ceu
       - |
         EFFECTIVE_VERSION="$(cat /workspace/effective-version.txt)"
-        docker push "${_DOCKER_REGION}-docker.pkg.dev/${PROJECT_ID}/${_DOCKER_REPO}/${_IMAGE}:$${EFFECTIVE_VERSION}"
+        docker push "${_DOCKER_REGION}-docker.pkg.dev/${PROJECT_ID}/${_DOCKER_REPO}/${_IMAGE}:$EFFECTIVE_VERSION"
   - name: gcr.io/cloud-builders/gcloud
     id: notify-build-complete
     entrypoint: bash
@@ -136,7 +136,7 @@ steps:
       gcloud pubsub topics publish \
       projects/c31-fwmtg-ci-prod/topics/service-build-events \
       --message="{}" \
-        --attribute=REPO_NAME=census31-fwmt-csv-service,SHORT_SHA=$${EFFECTIVE_VERSION},STATUS=SUCCESS
+        --attribute=REPO_NAME=census31-fwmt-csv-service,SHORT_SHA=$EFFECTIVE_VERSION,STATUS=SUCCESS
 substitutions:
   _DOCKER_REGION: europe-west2
   _DOCKER_REPO: "fwmtg-docker-release"
