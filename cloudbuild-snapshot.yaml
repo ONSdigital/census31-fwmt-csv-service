@@ -112,7 +112,7 @@ steps:
         if [[ -n "${_BASE_BRANCH}" ]]; then
           IMAGE_TAG="$${EFFECTIVE_VERSION}"
         else
-          BRANCH_SAFE="$$(echo "${BRANCH_NAME:-feature}" | tr '[:upper:]' '[:lower:]' | sed -E 's#[^a-z0-9]+#-#g; s#^-+##; s#-+$##' | cut -c1-20)"
+          BRANCH_SAFE="$$(echo "${BRANCH_NAME}" | tr '[:upper:]' '[:lower:]' | sed -E 's#[^a-z0-9]+#-#g; s#^-+##; s#-+$##' | cut -c1-20)"
           IMAGE_TAG="$${BRANCH_SAFE}-$${EFFECTIVE_VERSION}-${SHORT_SHA}"
         fi
         docker build --pull \
