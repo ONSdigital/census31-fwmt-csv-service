@@ -100,7 +100,7 @@ steps:
       - -ceu
       - |
         EFFECTIVE_VERSION="$(cat /workspace/effective-version.txt)"
-        mvn -B -ntp -s /workspace/settings.xml -Drevision="$EFFECTIVE_VERSION" clean verify
+        mvn -B -ntp -s /workspace/settings.xml -Drevision="$${EFFECTIVE_VERSION}" clean verify
 
   - name: gcr.io/cloud-builders/docker
     id: Build Docker Snapshot Image
@@ -110,16 +110,16 @@ steps:
       - |
         EFFECTIVE_VERSION="$(cat /workspace/effective-version.txt)"
         if [[ -n "${_BASE_BRANCH}" ]]; then
-          IMAGE_TAG="${EFFECTIVE_VERSION}"
+          IMAGE_TAG="$${EFFECTIVE_VERSION}"
         else
-          BRANCH_SAFE="$(echo "${BRANCH_NAME:-feature}" | tr '[:upper:]' '[:lower:]' | sed -E 's#[^a-z0-9]+#-#g; s#^-+##; s#-+$##' | cut -c1-20)"
-          IMAGE_TAG="${BRANCH_SAFE}-${EFFECTIVE_VERSION}-${SHORT_SHA}"
+          BRANCH_SAFE="$$(echo "${BRANCH_NAME:-feature}" | tr '[:upper:]' '[:lower:]' | sed -E 's#[^a-z0-9]+#-#g; s#^-+##; s#-+$##' | cut -c1-20)"
+          IMAGE_TAG="$${BRANCH_SAFE}-$${EFFECTIVE_VERSION}-${SHORT_SHA}"
         fi
         docker build --pull \
           --build-arg jar=$(ls target/*.jar | grep -v original | head -1) \
-          -t "${_DOCKER_REGION}-docker.pkg.dev/${PROJECT_ID}/${_DOCKER_REPO}/${_IMAGE}:${IMAGE_TAG}" \
+          -t "${_DOCKER_REGION}-docker.pkg.dev/${PROJECT_ID}/${_DOCKER_REPO}/${_IMAGE}:$${IMAGE_TAG}" \
           .
-        echo "${IMAGE_TAG}" > /workspace/image-tag.txt
+        echo "$${IMAGE_TAG}" > /workspace/image-tag.txt
 
   - name: gcr.io/cloud-builders/docker
     id: Push Docker Snapshot Image
