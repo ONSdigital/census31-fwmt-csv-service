@@ -109,20 +109,18 @@ steps:
       - -ceu
       - |
         echo "=== DEBUG: Cloud Build substitution vars ==="
-        echo "BRANCH_NAME=$${BRANCH_NAME}"
-        echo "SHORT_SHA=$${SHORT_SHA}"
-        echo "_PR_NUMBER=$${_PR_NUMBER}"
-        echo "_BASE_BRANCH=$${_BASE_BRANCH}"
-        echo "_HEAD_BRANCH=$${_HEAD_BRANCH}"
-        echo "TRIGGER_NAME=$${TRIGGER_NAME}"
+        echo "BRANCH_NAME=${BRANCH_NAME}"
+        echo "SHORT_SHA=${SHORT_SHA}"
+        echo "_PR_NUMBER=${_PR_NUMBER}"
+        echo "_BASE_BRANCH=${_BASE_BRANCH}"
+        echo "TRIGGER_NAME=${TRIGGER_NAME}"
         echo "=== END DEBUG ==="
         EFFECTIVE_VERSION="$(cat /workspace/effective-version.txt)"
-        if [[ -n "$${_BASE_BRANCH}" ]]; then
-          # PR trigger: _BASE_BRANCH is only set on PR builds
+        if [[ -n "${_BASE_BRANCH}" ]]; then
           IMAGE_TAG="$${EFFECTIVE_VERSION}"
         else
-          BRANCH_SAFE="$$(echo "$${BRANCH_NAME:-feature}" | tr '[:upper:]' '[:lower:]' | sed -E 's#[^a-z0-9]+#-#g; s#^-+##; s#-+$##' | cut -c1-20)"
-          IMAGE_TAG="$${BRANCH_SAFE}-$${EFFECTIVE_VERSION}-$${SHORT_SHA}"
+          BRANCH_SAFE="$$(echo "${BRANCH_NAME:-feature}" | tr '[:upper:]' '[:lower:]' | sed -E 's#[^a-z0-9]+#-#g; s#^-+##; s#-+$##' | cut -c1-20)"
+          IMAGE_TAG="$${BRANCH_SAFE}-$${EFFECTIVE_VERSION}-${SHORT_SHA}"
         fi
         docker build --pull \
           --build-arg jar=$(ls target/*.jar | grep -v original | head -1) \
@@ -145,6 +143,7 @@ substitutions:
   _IMAGE: census31-fwmt-csv-service
   _REGION: europe-west2
   _PR_NUMBER: ""
+  _BASE_BRANCH: ""
 
 options:
   logging: CLOUD_LOGGING_ONLY
