@@ -109,7 +109,7 @@ steps:
       - -ceu
       - |
         EFFECTIVE_VERSION="$(cat /workspace/effective-version.txt)"
-        if [[ -n "${_BASE_BRANCH}" ]]; then
+        if [[ "${TRIGGER_NAME}" == *-build ]]; then
           IMAGE_TAG="$${EFFECTIVE_VERSION}"
         else
           BRANCH_SAFE="$$(echo "${BRANCH_NAME}" | tr '[:upper:]' '[:lower:]' | sed -E 's#[^a-z0-9]+#-#g; s#^-+##; s#-+$##' | cut -c1-20)"
@@ -136,7 +136,6 @@ substitutions:
   _IMAGE: census31-fwmt-csv-service
   _REGION: europe-west2
   _PR_NUMBER: ""
-  _BASE_BRANCH: ""
 
 options:
   logging: CLOUD_LOGGING_ONLY
