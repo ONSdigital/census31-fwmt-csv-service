@@ -117,9 +117,9 @@ steps:
         fi
         docker build --pull \
           --build-arg jar=$(ls target/*.jar | grep -v original | head -1) \
-          -t "${_DOCKER_REGION}-docker.pkg.dev/${PROJECT_ID}/${_DOCKER_REPO}/${_IMAGE}:$${IMAGE_TAG}" \
+          -t "${_DOCKER_REGION}-docker.pkg.dev/${PROJECT_ID}/${_DOCKER_REPO}/${_IMAGE}:${IMAGE_TAG}" \
           .
-        echo "$${IMAGE_TAG}" > /workspace/image-tag.txt
+        echo "${IMAGE_TAG}" > /workspace/image-tag.txt
 
   - name: gcr.io/cloud-builders/docker
     id: Push Docker Snapshot Image
