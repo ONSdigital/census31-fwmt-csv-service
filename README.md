@@ -2,4 +2,4 @@
 
 # census31-fwmt-csv-service
 
-silent trigger
+bump
