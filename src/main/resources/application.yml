@@ -61,8 +61,6 @@ app:
     maxInterval: 45000
   messaging:
     provider: pubsub
-    destinations:
-      gatewayActions: "Gateway.Actions.Exchange"
 
 ---
 spring:
